@@ -3,9 +3,11 @@ library(dplyr)
 library(tidyverse)
 library(readr)
 library(stringr)
+library(readxl)
 
-#Original billboard rank set
+#Original billboard rank sets
 billboard <- read_csv("data/billboard.csv")
+spotify <- read_csv("data/SpotifyAudioFeaturesApril2019.csv")
 
 
 
@@ -46,6 +48,15 @@ rank <- rankValue %>% inner_join(rankWeeks, by=c("song","artist"))
 
 
 
+#Set spotify cleaning
+spotify <- subset(spotify, select = -c(track_id, popularity))
+
+
+
+
+
+
+
 #Prepare new set for use for chord parser utility
 chords <- subset(rank, select = c(song, artist))
 
@@ -70,6 +81,9 @@ write.csv(chords, "data\\scrapeSongs.csv", row.names = FALSE, quote = FALSE)
 artistNames <- as.data.frame(t(chords))
 artistNames <- artistNames[2,]
 write.csv(artistNames, "data\\artistNames.csv", row.names = FALSE, quote = TRUE)
+
+#Export rank set
+write.csv(rank, "data\\rank.csv", row.names = FALSE, quote = TRUE)
 
 
 
