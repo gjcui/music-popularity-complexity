@@ -50,8 +50,8 @@ rank <- rankValue %>% inner_join(rankWeeks, by=c("song","artist"))
 
 #Set spotify cleaning
 spotify <- subset(spotify, select = -c(track_id, popularity))
-
-
+spotify <- spotify[order(spotify$track_name, spotify$artist_name),]
+spotify <- rename(spotify, song = 'track_name', artist = 'artist_name')
 
 
 
