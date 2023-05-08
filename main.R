@@ -86,6 +86,22 @@ spotify$artist <- str_replace_all(spotify$artist, "\\s+", " ")
 rank$song <- str_replace_all(rank$song, "\\s+", " ")
 rank$artist <- str_replace_all(rank$artist, "\\s+", " ")
 
+spotify$artist <- trimws(spotify$artist)
+spotify$song <- trimws(spotify$song)
+
+rank$artist <- trimws(rank$artist)
+rank$song <- trimws(rank$song)
+
+
+
+
+
+
+
+
+
+
+
 
 
 joined_data <- inner_join(rank, spotify, by = c("song", "artist"))
